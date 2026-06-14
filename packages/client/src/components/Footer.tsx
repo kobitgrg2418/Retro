@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3 className="footer-heading">Gokyo Bistro</h3>
+          <h3 className="footer-heading">F<span className="brand-accent">oo</span>dy</h3>
           <p className="footer-text">
             Authentic Himalayan cuisine in the heart of the city.
             Experience the flavors of Nepal with every bite.

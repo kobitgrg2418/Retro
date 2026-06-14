@@ -21,8 +21,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand" onClick={close}>
-          <span className="brand-icon">&#9733;</span>
-          Gokyo Bistro
+          F<span className="brand-accent">oo</span>dy
         </Link>
 
         <button
