@@ -134,7 +134,12 @@ export default function Home() {
             <p className="section-subtitle">Handpicked favorites from our kitchen</p>
             <div className="carousel-wrap">
               <button className="carousel-btn prev" onClick={() => scroll(-1)} aria-label="Previous">&#8249;</button>
-              <div className="featured-carousel" ref={carouselRef}>
+              <div
+                className="featured-carousel"
+                ref={carouselRef}
+                onMouseEnter={() => { pausedRef.current = true; }}
+                onMouseLeave={() => { pausedRef.current = false; }}
+              >
                 {featured.map(item => (
                   <div key={item.id} className="dish-card">
                     {item.is_premium ? <span className="dish-premium">Premium</span> : null}
