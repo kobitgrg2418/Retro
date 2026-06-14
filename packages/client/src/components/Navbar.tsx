@@ -21,7 +21,17 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand" onClick={close}>
-          F<span className="brand-accent">oo</span>dy
+          <svg className="brand-mountain" viewBox="0 0 80 40" aria-hidden="true">
+            <path
+              d="M2 37 L22 9 L31 21 L39 10 L50 25 L58 17 L78 37"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="brand-name">Gokyo Bistro</span>
         </Link>
 
         <button

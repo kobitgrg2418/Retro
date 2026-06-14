@@ -5,7 +5,19 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3 className="footer-heading">F<span className="brand-accent">oo</span>dy</h3>
+          <h3 className="footer-heading footer-brand">
+            <svg className="brand-mountain" viewBox="0 0 80 40" aria-hidden="true">
+              <path
+                d="M2 37 L22 9 L31 21 L39 10 L50 25 L58 17 L78 37"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Gokyo Bistro
+          </h3>
           <p className="footer-text">
             Authentic Himalayan cuisine in the heart of the city.
             Experience the flavors of Nepal with every bite.
