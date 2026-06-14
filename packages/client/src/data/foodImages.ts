@@ -45,8 +45,8 @@ const BY_CATEGORY: Record<string, string> = {
 
 const GENERIC = '1504674900247-0877df9cc836';
 
-// A nice plated spread used as the hero centerpiece.
-export const HERO_IMAGE = `${UNSPLASH}1504674900247-0877df9cc836?w=900&h=900&fit=crop&q=80`;
+// Nepali steamed momos — hero centerpiece.
+export const HERO_IMAGE = `${UNSPLASH}1563245372-f21724e3856d?w=900&h=900&fit=crop&q=80`;
 
 interface ImageableItem {
   name?: string;
