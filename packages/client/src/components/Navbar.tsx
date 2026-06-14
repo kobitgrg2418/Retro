@@ -1,0 +1,74 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+
+export default function Navbar() {
+  const { isAuthenticated, isAdmin, user, logout } = useAuth();
+  const { itemCount } = useCart();
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+    setMenuOpen(false);
+  };
+
+  const close = () => setMenuOpen(false);
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        <Link to="/" className="navbar-brand" onClick={close}>
+          <span className="brand-icon">&#9733;</span>
+          Gokyo Bistro
+        </Link>
+
+        <button
+          className="navbar-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation"
+        >
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
+          <span className="toggle-bar"></span>
+        </button>
+
+        <div className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
+          <Link to="/" className="nav-link" onClick={close}>Home</Link>
+          <Link to="/menu" className="nav-link" onClick={close}>Menu</Link>
+          <Link to="/booking" className="nav-link" onClick={close}>Book a Table</Link>
+
+          {isAuthenticated && (
+            <>
+              <Link to="/orders" className="nav-link" onClick={close}>My Orders</Link>
+              {isAdmin && (
+                <Link to="/admin" className="nav-link nav-link-admin" onClick={close}>Admin</Link>
+              )}
+            </>
+          )}
+
+          <Link to="/cart" className="nav-link cart-link" onClick={close}>
+            Cart
+            {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
+          </Link>
+
+          {isAuthenticated ? (
+            <div className="nav-user">
+              <Link to="/profile" className="nav-link" onClick={close}>
+                {user?.name || 'Profile'}
+              </Link>
+              <button className="btn btn-sm btn-outline" onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <div className="nav-user">
+              <Link to="/login" className="nav-link" onClick={close}>Login</Link>
+              <Link to="/register" className="btn btn-sm btn-primary" onClick={close}>Sign Up</Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+}
