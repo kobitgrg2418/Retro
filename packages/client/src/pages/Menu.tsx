@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getMenu } from '../api';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { getFoodImage } from '../data/foodImages';
 import type { MenuItem } from '../types';
 
 const CATEGORIES = [
@@ -13,13 +14,6 @@ const CATEGORIES = [
   { label: 'Beverages', value: 'beverage' },
   { label: 'Premium Beverages', value: 'premium_beverage' },
 ];
-const FOOD_EMOJIS: Record<string, string> = {
-  appetizer: '🥟',
-  main_course: '🍛',
-  dessert: '🍰',
-  beverage: '🍵',
-  premium_beverage: '🍷',
-};
 const CATEGORY_LABELS: Record<string, string> = {
   appetizer: 'Appetizer',
   main_course: 'Main Course',
@@ -108,10 +102,13 @@ export default function Menu() {
               <div key={item.id} className="menu-card">
                 <Link to={`/menu/${item.id}`} className="menu-card-link">
                   <div className="menu-card-image">
-                    <span className="menu-card-emoji">
-                      {FOOD_EMOJIS[item.category] || '🍽️'}
-                    </span>
-                    {item.is_premium && (
+                    <img
+                      className="menu-card-img"
+                      src={getFoodImage(item, 500)}
+                      alt={item.name}
+                      loading="lazy"
+                    />
+                    {!!item.is_premium && (
                       <span className="badge badge-premium">Premium</span>
                     )}
                     {!item.is_available && (

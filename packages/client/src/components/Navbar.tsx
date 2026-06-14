@@ -49,8 +49,9 @@ export default function Navbar() {
             </>
           )}
 
-          <Link to="/cart" className="nav-link cart-link" onClick={close}>
-            Cart
+          <Link to="/cart" className="nav-link cart-link" onClick={close} aria-label="Cart">
+            <span className="cart-icon" aria-hidden="true">&#128722;</span>
+            <span className="cart-text">Cart</span>
             {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
           </Link>
 

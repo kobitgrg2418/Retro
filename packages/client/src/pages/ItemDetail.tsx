@@ -3,15 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { getMenuItem } from '../api';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { getFoodImage } from '../data/foodImages';
 import type { MenuItem } from '../types';
-
-const CATEGORY_EMOJIS: Record<string, string> = {
-  appetizer: '🥟',
-  main_course: '🍛',
-  dessert: '🍰',
-  beverage: '🍵',
-  premium_beverage: '🍷',
-};
 
 const CATEGORY_LABELS: Record<string, string> = {
   appetizer: 'Appetizers',
@@ -66,10 +59,8 @@ export default function ItemDetail() {
 
         <div className="item-detail">
           <div className="item-detail-image">
-            <span className="item-detail-emoji">
-              {CATEGORY_EMOJIS[item.category] || '🍽️'}
-            </span>
-            {item.is_premium && <span className="badge badge-premium">Premium</span>}
+            <img className="item-detail-img" src={getFoodImage(item, 800)} alt={item.name} />
+            {!!item.is_premium && <span className="badge badge-premium">Premium</span>}
           </div>
 
           <div className="item-detail-info">
@@ -84,7 +75,7 @@ export default function ItemDetail() {
               <div className="alert alert-warning">This item is currently unavailable.</div>
             )}
 
-            {item.is_premium && !isAuthenticated && (
+            {!!item.is_premium && !isAuthenticated && (
               <div className="alert alert-info">
                 <span className="lock-icon">&#128274;</span>
                 This is a premium item. <Link to="/login">Log in</Link> to order.

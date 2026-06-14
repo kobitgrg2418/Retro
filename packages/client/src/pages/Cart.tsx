@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { getFoodImage } from '../data/foodImages';
 
 export default function Cart() {
   const { items, removeItem, updateQuantity, totalAmount, clearCart } = useCart();
@@ -35,9 +36,10 @@ export default function Cart() {
           <div className="cart-items">
             {items.map(item => (
               <div key={item.id} className="cart-item">
+                <img className="cart-item-img" src={getFoodImage(item.name, 150)} alt={item.name} />
                 <div className="cart-item-info">
                   <h3 className="cart-item-name">{item.name}</h3>
-                  {item.is_premium && <span className="badge badge-premium">Premium</span>}
+                  {!!item.is_premium && <span className="badge badge-premium">Premium</span>}
                   <p className="cart-item-price">Rs. {item.price}</p>
                 </div>
 
