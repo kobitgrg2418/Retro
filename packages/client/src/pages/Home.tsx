@@ -25,6 +25,7 @@ export default function Home() {
   const [offers, setOffers] = useState<Offer[]>([]);
   const { addItem } = useCart();
   const carouselRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
 
   useEffect(() => {
     getMenu()
@@ -34,6 +35,23 @@ export default function Home() {
       .then(data => setOffers(data.filter(o => o.is_active)))
       .catch(() => {});
   }, []);
+
+  // Auto-advance the featured carousel every 1.5s (loops; pauses on hover).
+  useEffect(() => {
+    if (featured.length === 0) return;
+    const id = setInterval(() => {
+      const el = carouselRef.current;
+      if (!el || pausedRef.current) return;
+      const card = el.querySelector<HTMLElement>('.dish-card');
+      const step = card ? card.offsetWidth + 26 : 296;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, 1500);
+    return () => clearInterval(id);
+  }, [featured]);
 
   const scroll = (dir: number) => {
     carouselRef.current?.scrollBy({ left: dir * 320, behavior: 'smooth' });
