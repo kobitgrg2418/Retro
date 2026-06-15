@@ -11,7 +11,7 @@ const PHOTOS: Record<string, string> = {
   'Momo (Fried)': 'dumpling',
   'Chatamari': 'chatamari',
   'Sekuwa Skewers': 'sekuwa',
-  'Aloo Sadeko': 'choila',
+  'Aloo Sadeko': 'aloo',
   'Choila': 'choila',
   'Dal Bhat Tarkari': 'thali',
   'Thakali Set': 'thakali',
