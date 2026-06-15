@@ -1,5 +1,6 @@
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent, type ChangeEvent } from 'react';
 import { getMenu, createMenuItem, updateMenuItem, deleteMenuItem } from '../../api';
+import { getFoodImage } from '../../data/foodImages';
 import type { MenuItem } from '../../types';
 
 const CATEGORIES = [
@@ -46,6 +47,8 @@ export default function MenuManagement() {
   const [form, setForm] = useState<MenuForm>(EMPTY_FORM);
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState('');
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
 
   const loadItems = () => {
     setLoading(true);
@@ -61,6 +64,8 @@ export default function MenuManagement() {
     setForm(EMPTY_FORM);
     setEditId(null);
     setFormError('');
+    setImageFile(null);
+    setImagePreview('');
     setShowModal(true);
   };
 
@@ -75,7 +80,15 @@ export default function MenuManagement() {
     });
     setEditId(item.id);
     setFormError('');
+    setImageFile(null);
+    setImagePreview(getFoodImage(item));
     setShowModal(true);
+  };
+
+  const onPickImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setImageFile(file);
+    if (file) setImagePreview(URL.createObjectURL(file));
   };
 
   const handleDelete = async (id: number) => {
@@ -106,9 +119,9 @@ export default function MenuManagement() {
         is_available: form.is_available ? 1 : 0,
       };
       if (editId) {
-        await updateMenuItem(editId, data);
+        await updateMenuItem(editId, data, imageFile);
       } else {
-        await createMenuItem(data);
+        await createMenuItem(data, imageFile);
       }
       setShowModal(false);
       loadItems();
@@ -135,6 +148,7 @@ export default function MenuManagement() {
           <table className="admin-table">
             <thead>
               <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -146,6 +160,13 @@ export default function MenuManagement() {
             <tbody>
               {items.map(item => (
                 <tr key={item.id}>
+                  <td>
+                    <img
+                      src={getFoodImage(item)}
+                      alt={item.name}
+                      style={{ width: 52, height: 52, borderRadius: 10, objectFit: 'cover', background: '#fff' }}
+                    />
+                  </td>
                   <td>{item.name}</td>
                   <td><span className="badge badge-category">{CATEGORY_LABELS[item.category] || item.category}</span></td>
                   <td>Rs. {item.price}</td>
@@ -203,6 +224,23 @@ export default function MenuManagement() {
                   onChange={e => setForm({ ...form, description: e.target.value })}
                   rows={3}
                 />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Image</label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <img
+                    src={imagePreview || getFoodImage({ name: form.name, category: form.category })}
+                    alt="preview"
+                    style={{ width: 84, height: 84, borderRadius: 14, objectFit: 'cover', background: '#fff', border: '1px solid var(--line)' }}
+                  />
+                  <div>
+                    <input type="file" accept="image/*" onChange={onPickImage} />
+                    <p style={{ fontSize: '0.78rem', color: 'var(--ink-faint)', marginTop: 6 }}>
+                      PNG/JPG up to 5&nbsp;MB. Leave empty to keep the current image.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="form-row">

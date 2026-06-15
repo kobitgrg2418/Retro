@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { initDb } from "./database.js";
 import { seedDb } from "./seed.js";
 import authRoutes from "./routes/auth.js";
@@ -19,6 +21,10 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+
+// Serve uploaded menu images at /uploads/menu/<file>
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 // Routes
 app.use("/api/auth", authRoutes);

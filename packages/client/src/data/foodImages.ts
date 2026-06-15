@@ -57,6 +57,7 @@ export const HERO_IMAGE = `${BASE}momo.jpg`;
 interface ImageableItem {
   name?: string;
   category?: string;
+  image_url?: string;
 }
 
 function plate(emoji: string): string {
@@ -74,6 +75,10 @@ function plate(emoji: string): string {
 export function getFoodImage(item: ImageableItem | string, _size = 600): string {
   const name = typeof item === 'string' ? item : item.name;
   const category = typeof item === 'string' ? undefined : item.category;
+  const uploaded = typeof item === 'string' ? undefined : item.image_url;
+
+  // An admin-uploaded image always wins.
+  if (uploaded) return uploaded;
 
   if (name && PHOTOS[name]) return `${BASE}${PHOTOS[name]}.jpg`;
   if (name && EMOJIS[name]) return plate(EMOJIS[name]);

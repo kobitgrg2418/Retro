@@ -78,7 +78,29 @@ export async function getMenuItem(id: number) {
   return data.item;
 }
 
-export async function createMenuItem(data: Partial<MenuItem>) {
+// Builds a multipart request (used when an image File is attached).
+async function menuMultipart(url: string, method: 'POST' | 'PUT', data: Partial<MenuItem>, image: File) {
+  const token = localStorage.getItem('gokyo_token');
+  const form = new FormData();
+  Object.entries(data).forEach(([k, v]) => {
+    if (v !== undefined && v !== null) form.append(k, String(v));
+  });
+  form.append('image', image);
+
+  const res = await fetch(`${BASE}${url}`, {
+    method,
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    body: form,
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({ message: res.statusText }));
+    throw new Error(body.message || body.error || `Request failed: ${res.status}`);
+  }
+  return (await res.json()).item as MenuItem;
+}
+
+export async function createMenuItem(data: Partial<MenuItem>, image?: File | null) {
+  if (image) return menuMultipart('/menu', 'POST', data, image);
   const res = await apiFetch<{ item: MenuItem }>('/menu', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -86,7 +108,8 @@ export async function createMenuItem(data: Partial<MenuItem>) {
   return res.item;
 }
 
-export async function updateMenuItem(id: number, data: Partial<MenuItem>) {
+export async function updateMenuItem(id: number, data: Partial<MenuItem>, image?: File | null) {
+  if (image) return menuMultipart(`/menu/${id}`, 'PUT', data, image);
   const res = await apiFetch<{ item: MenuItem }>(`/menu/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
