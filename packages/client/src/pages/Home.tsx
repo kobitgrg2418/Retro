@@ -115,7 +115,13 @@ export default function Home() {
               </div>
             </div>
             <div className="hero-chip chip-1">
-              <span className="hero-chip-emoji">&#128075;</span> Free Delivery
+              <svg className="hero-chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="1" y="4" width="14" height="11" rx="1" />
+                <path d="M15 8h4l3 3v4h-7z" />
+                <circle cx="5.5" cy="18" r="2" />
+                <circle cx="17.5" cy="18" r="2" />
+              </svg>
+              Free Delivery
             </div>
             <div className="hero-chip chip-2">
               <span className="hero-chip-emoji">&#9201;</span> 30 min
