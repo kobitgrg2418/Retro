@@ -1,4 +1,4 @@
-import { useState, useEffect, type FormEvent, type ChangeEvent } from 'react';
+import { useState, useEffect, useRef, type FormEvent, type ChangeEvent, type DragEvent } from 'react';
 import { getMenu, createMenuItem, updateMenuItem, deleteMenuItem } from '../../api';
 import { getFoodImage } from '../../data/foodImages';
 import type { MenuItem } from '../../types';
@@ -49,6 +49,8 @@ export default function MenuManagement() {
   const [formError, setFormError] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
+  const [dragging, setDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const loadItems = () => {
     setLoading(true);
@@ -85,10 +87,26 @@ export default function MenuManagement() {
     setShowModal(true);
   };
 
-  const onPickImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
+  const setImage = (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      setFormError('Please choose an image file (PNG or JPG).');
+      return;
+    }
+    setFormError('');
     setImageFile(file);
-    if (file) setImagePreview(URL.createObjectURL(file));
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const onPickImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setImage(file);
+  };
+
+  const onDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) setImage(file);
   };
 
   const handleDelete = async (id: number) => {
@@ -228,18 +246,29 @@ export default function MenuManagement() {
 
               <div className="form-group">
                 <label className="form-label">Image</label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <div
+                  className={`dropzone ${dragging ? 'dragging' : ''}`}
+                  onClick={() => fileInputRef.current?.click()}
+                  onDragOver={e => { e.preventDefault(); setDragging(true); }}
+                  onDragLeave={() => setDragging(false)}
+                  onDrop={onDrop}
+                >
                   <img
+                    className="dropzone-preview"
                     src={imagePreview || getFoodImage({ name: form.name, category: form.category })}
                     alt="preview"
-                    style={{ width: 84, height: 84, borderRadius: 14, objectFit: 'cover', background: '#fff', border: '1px solid var(--line)' }}
                   />
-                  <div>
-                    <input type="file" accept="image/*" onChange={onPickImage} />
-                    <p style={{ fontSize: '0.78rem', color: 'var(--ink-faint)', marginTop: 6 }}>
-                      PNG/JPG up to 5&nbsp;MB. Leave empty to keep the current image.
-                    </p>
+                  <div className="dropzone-text">
+                    <strong>Drag &amp; drop</strong> an image here, or <span className="dropzone-link">browse</span>
+                    <small>PNG/JPG up to 5&nbsp;MB. Leave empty to keep the current image.</small>
                   </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={onPickImage}
+                    style={{ display: 'none' }}
+                  />
                 </div>
               </div>
 

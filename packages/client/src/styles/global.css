@@ -674,6 +674,38 @@ body::after { width: 460px; height: 460px; bottom: -160px; left: -120px; backgro
 .form-checkbox-label { display: inline-flex; align-items: center; gap: 9px; font-weight: 500; color: var(--ink); cursor: pointer; }
 .form-checkbox-label input { width: 18px; height: 18px; accent-color: var(--primary); }
 
+/* drag & drop image upload */
+.dropzone {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.dropzone:hover { border-color: var(--ink-faint); }
+.dropzone.dragging {
+  border-color: var(--brand-green);
+  background: #eef4f0;
+  box-shadow: 0 0 0 4px rgba(27, 90, 65, 0.12);
+}
+.dropzone-preview {
+  width: 84px; height: 84px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #fff;
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+.dropzone-text { font-size: 0.9rem; color: var(--ink-soft); pointer-events: none; }
+.dropzone-text strong { color: var(--ink); }
+.dropzone-link { color: var(--brand-green); font-weight: 600; text-decoration: underline; }
+.dropzone-text small { display: block; margin-top: 6px; font-size: 0.78rem; color: var(--ink-faint); }
+
 /* ============================================================
    Auth pages
    ============================================================ */
