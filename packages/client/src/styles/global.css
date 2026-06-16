@@ -23,9 +23,9 @@
   --primary-dark: #000000;   /* Pure black for subtle depth */
   --primary-soft: #f3f3f5;   /* Light neutral grey highlight */
   
-  --accent: #b3a17e;         /* Muted grey-gold — stars & subtle highlights only */
-  --accent-dark: #8f7d59;    /* Deeper muted gold for readability */
-  --accent-soft: #f4f3ef;    /* Faint neutral tint */
+  --accent: #c2a35c;         /* Refined gold — linings, stars, highlights */
+  --accent-dark: #a8893f;    /* Deeper gold for readability */
+  --accent-soft: #f6f1e4;    /* Faint gold tint */
 
   --green: #1b5a41;          /* Authentic mountain pine green (veg icon, brand) */
   --green-soft: #eaf4f0;     /* Soft sage background */
@@ -440,7 +440,7 @@ body::after {
   padding: 6px 16px;
   border-radius: 50px;
   margin-bottom: 20px;
-  border: 1px solid rgba(28, 28, 34, 0.3);
+  border: 1px solid rgba(194, 163, 92, 0.4);
 }
 .hero-title {
   font-size: clamp(2.5rem, 5vw, 4.2rem);
@@ -692,9 +692,9 @@ body::after {
 .section-title::after {
   content: '';
   display: block;
-  width: 64px; 
+  width: 64px;
   height: 4px;
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
   border-radius: 4px;
   margin: 16px auto 0;
 }
@@ -801,9 +801,9 @@ body::after {
   display: flex;
   flex-direction: column;
 }
-.dish-card:hover { 
-  transform: translateY(-12px); 
-  box-shadow: var(--shadow-lg); 
+.dish-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-lg);
   border-color: var(--line);
 }
 
@@ -950,9 +950,9 @@ body::after {
 .page-title::after {
   content: '';
   display: block; 
-  width: 60px; 
+  width: 60px;
   height: 4px;
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
   border-radius: 4px; 
   margin: 14px auto 0;
 }
@@ -1019,9 +1019,9 @@ body::after {
   display: flex;
   flex-direction: column;
 }
-.menu-card:hover { 
-  transform: translateY(-8px); 
-  box-shadow: var(--shadow-lg); 
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
   border-color: var(--line);
 }
 .menu-card-link { 
@@ -2216,11 +2216,24 @@ body::after {
   margin: 0 auto; 
   z-index: 1;
 }
-.reserve-text { 
-  color: rgba(255, 255, 255, 0.8); 
-  font-size: 1.1rem; 
-  margin: 18px 0 32px; 
+.reserve-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  margin: 18px 0 32px;
   line-height: 1.75;
+}
+/* Gold-lined reservation CTA on the dark section */
+.reserve-section .btn-primary {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: #fff;
+  box-shadow: none;
+}
+.reserve-section .btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border-color: transparent;
+  color: #1c1c22;
+  box-shadow: 0 12px 28px rgba(194, 163, 92, 0.35);
 }
 
 .testimonials-section { 
@@ -2240,10 +2253,10 @@ body::after {
   border: 1px solid rgba(232, 232, 236, 0.4); 
   transition: all 0.3s var(--ease); 
 }
-.testimonial-card:hover { 
-  transform: translateY(-6px); 
-  box-shadow: var(--shadow-md); 
-  border-color: var(--line);
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
 }
 .testimonial-card::before {
   content: '“';
