@@ -4,19 +4,19 @@
    Elegant typography, modern glassmorphism, & smooth micro-interactions
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* Surfaces & Backgrounds */
-  --bg: #fbf9f6;             /* Warm cream, inviting and cozy */
-  --bg-soft: #f5ede4;        /* Rich warm soft cream for sections */
+  --bg: #ffffff;             /* Clean white */
+  --bg-soft: #f6f6f8;        /* Soft neutral grey for sections */
   --surface: #ffffff;        /* Crisp card body white */
-  --surface-2: #faf6f0;      /* Slightly darker warm accent surface */
+  --surface-2: #fafafb;      /* Subtle neutral grey surface */
 
   /* Typography / Ink Colors */
-  --ink: #2c2520;            /* Warm dark espresso / charcoal */
-  --ink-soft: #6d5f56;       /* Soft warm grey-brown */
-  --ink-faint: #a29186;      /* Subdued label color */
+  --ink: #1c1c22;            /* Near-black, clean neutral */
+  --ink-soft: #5b5b66;       /* Neutral grey */
+  --ink-faint: #9a9aa4;      /* Subdued label color */
 
   /* Gourmet Brand Accents */
   --primary: #c84b31;        /* Rich Appetizing Himalayan Crimson / Terracotta */
@@ -35,15 +35,15 @@
   --brand-green: #1b5a41;    /* Signature mountain mark color */
 
   /* Borders / Lines / Shadows */
-  --line: #ebdcd0;           /* Soft clay border line */
-  --shadow-sm: 0 4px 12px rgba(44, 37, 32, 0.04);
-  --shadow-md: 0 12px 30px rgba(44, 37, 32, 0.08);
-  --shadow-lg: 0 24px 48px rgba(44, 37, 32, 0.12);
+  --line: #e8e8ec;           /* Soft neutral border line */
+  --shadow-sm: 0 4px 12px rgba(17, 17, 26, 0.05);
+  --shadow-md: 0 12px 30px rgba(17, 17, 26, 0.08);
+  --shadow-lg: 0 24px 48px rgba(17, 17, 26, 0.12);
   --shadow-primary: 0 10px 24px rgba(200, 75, 49, 0.25);
 
   /* Typography Tokens */
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Geometry & Animation Tokens */
   --radius: 16px;
@@ -140,7 +140,7 @@ body::after {
   filter: blur(100px);
   z-index: 0;
   pointer-events: none;
-  opacity: 0.65;
+  opacity: 0.3;
 }
 body::before { 
   width: 450px; 
@@ -271,7 +271,7 @@ body::after {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(251, 249, 246, 0.82);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   border-bottom: 1px solid rgba(235, 220, 208, 0.5);
@@ -2506,7 +2506,7 @@ body::after {
 .modal-overlay { 
   position: fixed; 
   inset: 0; 
-  background: rgba(44, 37, 32, 0.6); 
+  background: rgba(17, 17, 26, 0.55);
   backdrop-filter: blur(8px); 
   display: flex; 
   align-items: center; 
