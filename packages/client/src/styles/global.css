@@ -19,27 +19,27 @@
   --ink-faint: #9a9aa4;      /* Subdued label color */
 
   /* Gourmet Brand Accents */
-  --primary: #c84b31;        /* Rich Appetizing Himalayan Crimson / Terracotta */
-  --primary-dark: #a23822;   /* Deep burgundy / rust */
-  --primary-soft: #fdf0ed;   /* Light warm peach-pink highlight */
+  --primary: #1c1c22;        /* Charcoal — clean monochrome primary */
+  --primary-dark: #000000;   /* Pure black for subtle depth */
+  --primary-soft: #f3f3f5;   /* Light neutral grey highlight */
   
-  --accent: #d4a373;         /* Golden honey / bronze (stars, highlighting) */
-  --accent-dark: #b88655;    /* Deeper gold for readability */
-  --accent-soft: #f9f2ea;    /* Warm beige tint */
+  --accent: #b3a17e;         /* Muted grey-gold — stars & subtle highlights only */
+  --accent-dark: #8f7d59;    /* Deeper muted gold for readability */
+  --accent-soft: #f4f3ef;    /* Faint neutral tint */
 
   --green: #1b5a41;          /* Authentic mountain pine green (veg icon, brand) */
   --green-soft: #eaf4f0;     /* Soft sage background */
   
   --blue: #457b9d;           /* Majestic lake blue (reservations, info tags) */
   --blue-soft: #edf4f8;      /* Clean icy blue background */
-  --brand-green: #1b5a41;    /* Signature mountain mark color */
+  --brand-green: #1c1c22;    /* Charcoal mark for clean monochrome */
 
   /* Borders / Lines / Shadows */
   --line: #e8e8ec;           /* Soft neutral border line */
   --shadow-sm: 0 4px 12px rgba(17, 17, 26, 0.05);
   --shadow-md: 0 12px 30px rgba(17, 17, 26, 0.08);
   --shadow-lg: 0 24px 48px rgba(17, 17, 26, 0.12);
-  --shadow-primary: 0 10px 24px rgba(200, 75, 49, 0.25);
+  --shadow-primary: 0 10px 24px rgba(17, 17, 26, 0.25);
 
   /* Typography Tokens */
   --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -140,21 +140,21 @@ body::after {
   filter: blur(100px);
   z-index: 0;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0;
 }
 body::before { 
   width: 450px; 
   height: 450px; 
   top: -100px; 
   right: -50px; 
-  background: rgba(212, 163, 115, 0.15); 
+  background: rgba(28, 28, 34, 0.15); 
 }
 body::after { 
   width: 500px; 
   height: 500px; 
   bottom: -150px; 
   left: -100px; 
-  background: rgba(200, 75, 49, 0.08); 
+  background: rgba(17, 17, 26, 0.08); 
 }
 #root { 
   position: relative; 
@@ -219,7 +219,7 @@ body::after {
 }
 .btn-primary:hover { 
   transform: translateY(-3px) scale(1.02); 
-  box-shadow: 0 12px 28px rgba(200, 75, 49, 0.4); 
+  box-shadow: 0 12px 28px rgba(17, 17, 26, 0.4); 
 }
 .btn-primary:disabled { 
   opacity: 0.55; 
@@ -274,7 +274,7 @@ body::after {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border-bottom: 1px solid rgba(235, 220, 208, 0.5);
+  border-bottom: 1px solid rgba(232, 232, 236, 0.5);
   box-shadow: 0 4px 30px rgba(44, 37, 32, 0.02);
   transition: background 0.3s ease;
 }
@@ -339,7 +339,7 @@ body::after {
   background: var(--primary-soft);
 }
 .nav-link-admin:hover {
-  background: rgba(200, 75, 49, 0.12);
+  background: rgba(17, 17, 26, 0.12);
 }
 
 .cart-link { 
@@ -367,7 +367,7 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 8px rgba(200, 75, 49, 0.35);
+  box-shadow: 0 3px 8px rgba(17, 17, 26, 0.35);
   animation: floatBadge 3s infinite ease-in-out;
 }
 
@@ -413,8 +413,8 @@ body::after {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 500px at 85% 25%, rgba(212, 163, 115, 0.12), transparent 60%),
-    radial-gradient(700px 500px at 10% 80%, rgba(200, 75, 49, 0.06), transparent 60%);
+    radial-gradient(900px 500px at 85% 25%, rgba(28, 28, 34, 0.12), transparent 60%),
+    radial-gradient(700px 500px at 10% 80%, rgba(17, 17, 26, 0.06), transparent 60%);
   z-index: 0;
 }
 .hero-overlay {
@@ -440,7 +440,7 @@ body::after {
   padding: 6px 16px;
   border-radius: 50px;
   margin-bottom: 20px;
-  border: 1px solid rgba(212, 163, 115, 0.3);
+  border: 1px solid rgba(28, 28, 34, 0.3);
 }
 .hero-title {
   font-size: clamp(2.5rem, 5vw, 4.2rem);
@@ -553,7 +553,7 @@ body::after {
   position: absolute;
   width: 85%;
   height: 85%;
-  background: radial-gradient(circle, rgba(212, 163, 115, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(28, 28, 34, 0.2) 0%, transparent 70%);
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
@@ -694,7 +694,7 @@ body::after {
   display: block;
   width: 64px; 
   height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: var(--primary);
   border-radius: 4px;
   margin: 16px auto 0;
 }
@@ -796,7 +796,7 @@ body::after {
   margin-top: 70px;
   text-align: center;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(235, 220, 208, 0.4);
+  border: 1px solid rgba(232, 232, 236, 0.4);
   transition: all 0.4s var(--ease-spring);
   display: flex;
   flex-direction: column;
@@ -871,13 +871,13 @@ body::after {
   display: flex; 
   align-items: center; 
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(200, 75, 49, 0.3);
+  box-shadow: 0 4px 10px rgba(17, 17, 26, 0.3);
   transition: all 0.3s var(--ease-spring);
   line-height: 1;
 }
 .dish-add:hover { 
   transform: scale(1.15) rotate(90deg); 
-  box-shadow: 0 6px 14px rgba(200, 75, 49, 0.45);
+  box-shadow: 0 6px 14px rgba(17, 17, 26, 0.45);
 }
 .dish-premium {
   position: absolute; 
@@ -917,7 +917,7 @@ body::after {
   color: #fff; 
   border-color: transparent;
   transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 6px 16px rgba(200, 75, 49, 0.3);
+  box-shadow: 0 6px 16px rgba(17, 17, 26, 0.3);
 }
 .carousel-btn.prev { 
   left: -12px; 
@@ -952,7 +952,7 @@ body::after {
   display: block; 
   width: 60px; 
   height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: var(--primary);
   border-radius: 4px; 
   margin: 14px auto 0;
 }
@@ -1000,7 +1000,7 @@ body::after {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 6px 14px rgba(200, 75, 49, 0.35);
+  box-shadow: 0 6px 14px rgba(17, 17, 26, 0.35);
   transform: translateY(-2px);
 }
 
@@ -1014,7 +1014,7 @@ body::after {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(235, 220, 208, 0.4);
+  border: 1px solid rgba(232, 232, 236, 0.4);
   transition: all 0.35s var(--ease-spring);
   display: flex;
   flex-direction: column;
@@ -1036,7 +1036,7 @@ body::after {
   align-items: center;
   justify-content: center;
   padding: 22px;
-  border-bottom: 1px solid rgba(235, 220, 208, 0.3);
+  border-bottom: 1px solid rgba(232, 232, 236, 0.3);
 }
 .menu-card-img {
   width: 170px;
@@ -1189,7 +1189,7 @@ body::after {
   position: absolute;
   width: 90%;
   height: 90%;
-  background: radial-gradient(circle, rgba(212, 163, 115, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(28, 28, 34, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -1304,7 +1304,7 @@ body::after {
 .form-input:focus { 
   outline: none; 
   border-color: var(--primary); 
-  box-shadow: 0 0 0 4px var(--primary-soft), 0 6px 15px rgba(200, 75, 49, 0.05); 
+  box-shadow: 0 0 0 4px var(--primary-soft), 0 6px 15px rgba(17, 17, 26, 0.05); 
 }
 .form-textarea { 
   resize: vertical; 
@@ -1744,7 +1744,7 @@ body::after {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
   color: #fff; 
   border-color: transparent; 
-  box-shadow: 0 4px 12px rgba(200, 75, 49, 0.3); 
+  box-shadow: 0 4px 12px rgba(17, 17, 26, 0.3); 
 }
 .step-label { 
   font-weight: 600; 
@@ -1798,7 +1798,7 @@ body::after {
 .table-card.selected { 
   border-color: var(--primary); 
   background: var(--primary-soft); 
-  box-shadow: 0 6px 18px rgba(200, 75, 49, 0.12);
+  box-shadow: 0 6px 18px rgba(17, 17, 26, 0.12);
   transform: translateY(-4px);
 }
 .table-number { 
@@ -2095,7 +2095,7 @@ body::after {
 .star.filled,
 .star-filled { 
   color: var(--accent); 
-  text-shadow: 0 0 12px rgba(212, 163, 115, 0.45);
+  text-shadow: 0 0 12px rgba(28, 28, 34, 0.45);
 }
 
 
@@ -2197,7 +2197,7 @@ body::after {
 }
 
 .reserve-section { 
-  background: linear-gradient(135deg, #231f20, #38302b); 
+  background: linear-gradient(135deg, #1c1c22, #33333a); 
   position: relative; 
   overflow: hidden; 
   border-top: 1px solid var(--line);
@@ -2207,7 +2207,7 @@ body::after {
   content: ''; 
   position: absolute; 
   inset: 0; 
-  background: radial-gradient(700px 300px at 80% 20%, rgba(212, 163, 115, 0.12), transparent 60%); 
+  background: radial-gradient(700px 300px at 80% 20%, rgba(28, 28, 34, 0.12), transparent 60%); 
 }
 .reserve-content { 
   position: relative; 
@@ -2237,7 +2237,7 @@ body::after {
   border-radius: var(--radius-lg); 
   padding: 40px 30px 32px; 
   box-shadow: var(--shadow-sm); 
-  border: 1px solid rgba(235, 220, 208, 0.4); 
+  border: 1px solid rgba(232, 232, 236, 0.4); 
   transition: all 0.3s var(--ease); 
 }
 .testimonial-card:hover { 
@@ -2252,7 +2252,7 @@ body::after {
   left: 20px;
   font-size: 6rem;
   font-family: var(--serif);
-  color: rgba(212, 163, 115, 0.12);
+  color: rgba(28, 28, 34, 0.12);
   line-height: 1;
   pointer-events: none;
   font-style: normal;
@@ -2289,12 +2289,12 @@ body::after {
   min-height: calc(100vh - 80px); 
 }
 .admin-sidebar { 
-  background: #1e1b18; 
+  background: #18181b; 
   color: #fff; 
   padding: 32px 20px; 
   display: flex; 
   flex-direction: column; 
-  border-right: 1px solid rgba(235, 220, 208, 0.1);
+  border-right: 1px solid rgba(232, 232, 236, 0.1);
 }
 .admin-sidebar-header { 
   font-family: var(--serif); 
@@ -2324,7 +2324,7 @@ body::after {
 .admin-nav-link.active { 
   background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
   color: #fff; 
-  box-shadow: 0 8px 18px rgba(200, 75, 49, 0.35); 
+  box-shadow: 0 8px 18px rgba(17, 17, 26, 0.35); 
 }
 .admin-sidebar-footer { 
   margin-top: auto; 
@@ -2474,11 +2474,11 @@ body::after {
   background: var(--surface-2); 
   border-radius: 50px; 
   overflow: hidden; 
-  border: 1px solid rgba(235, 220, 208, 0.4);
+  border: 1px solid rgba(232, 232, 236, 0.4);
 }
 .bar-chart-fill { 
   height: 100%; 
-  background: linear-gradient(90deg, var(--primary), var(--accent)); 
+  background: var(--primary); 
   border-radius: 50px; 
   transition: width 0.8s var(--ease); 
 }
@@ -2600,7 +2600,7 @@ body::after {
    Footer Section
    ============================================================ */
 .footer { 
-  background: linear-gradient(180deg, #1e1b18, #13110f); 
+  background: linear-gradient(180deg, #18181b, #0f0f12); 
   color: rgba(255, 255, 255, 0.7); 
   margin-top: auto; 
   border-top: 3px solid var(--accent);
