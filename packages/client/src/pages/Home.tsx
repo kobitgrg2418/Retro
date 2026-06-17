@@ -13,11 +13,23 @@ const CATEGORY_LABELS: Record<string, string> = {
   premium_beverage: 'Premium',
 };
 
+// Guest avatars as local inline SVGs (brand palette) — no external service,
+// so the social-proof block always renders even offline or if a CDN is down.
+const avatar = (bg: string, fg: string) =>
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'>` +
+      `<rect width='96' height='96' fill='${bg}'/>` +
+      `<circle cx='48' cy='38' r='17' fill='${fg}'/>` +
+      `<path d='M18 86c0-16 13-27 30-27s30 11 30 27z' fill='${fg}'/>` +
+      `</svg>`,
+  );
+
 const AVATARS = [
-  'https://i.pravatar.cc/96?img=12',
-  'https://i.pravatar.cc/96?img=32',
-  'https://i.pravatar.cc/96?img=45',
-  'https://i.pravatar.cc/96?img=5',
+  avatar('#f6f1e4', '#a8893f'), // gold
+  avatar('#eaf4f0', '#1b5a41'), // pine green
+  avatar('#edf4f8', '#457b9d'), // lake blue
+  avatar('#f3f3f5', '#1c1c22'), // charcoal
 ];
 
 export default function Home() {
@@ -37,8 +49,10 @@ export default function Home() {
   }, []);
 
   // Auto-advance the featured carousel every 1.5s (loops; pauses on hover).
+  // Skipped for visitors who prefer reduced motion.
   useEffect(() => {
     if (featured.length === 0) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const id = setInterval(() => {
       const el = carouselRef.current;
       if (!el || pausedRef.current) return;
@@ -96,7 +110,7 @@ export default function Home() {
                   <span className="avatar-more">10K+</span>
                 </div>
                 <div className="hero-stars">
-                  &#9733;&#9733;&#9733;&#9733;&#9733;
+                  <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                   <small>4.9 from 2,500+ reviews</small>
                 </div>
               </div>
@@ -126,8 +140,8 @@ export default function Home() {
             <div className="hero-chip chip-2">
               <span className="hero-chip-emoji">&#9201;</span> 30 min
             </div>
-            <span className="float-emoji fe-1">&#127813;</span>
-            <span className="float-emoji fe-2">&#127807;</span>
+            <span className="float-emoji fe-1" aria-hidden="true">&#127813;</span>
+            <span className="float-emoji fe-2" aria-hidden="true">&#127807;</span>
           </div>
         </div>
       </section>
@@ -254,7 +268,7 @@ export default function Home() {
           <p className="section-subtitle">Real stories from our happy diners</p>
           <div className="testimonials-grid">
             <div className="testimonial-card">
-              <div className="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div className="testimonial-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
               <p className="testimonial-text">
                 &ldquo;The momos at Gokyo Bistro are hands down the best I have ever had.
                 The flavors transport you straight to Kathmandu. An absolute gem!&rdquo;
@@ -262,7 +276,7 @@ export default function Home() {
               <p className="testimonial-author">&mdash; Priya S.</p>
             </div>
             <div className="testimonial-card">
-              <div className="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div className="testimonial-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
               <p className="testimonial-text">
                 &ldquo;A wonderful dining experience from start to finish. The ambiance,
                 the service, and the thali platter are all world-class. Highly recommended!&rdquo;
@@ -270,7 +284,7 @@ export default function Home() {
               <p className="testimonial-author">&mdash; Raj M.</p>
             </div>
             <div className="testimonial-card">
-              <div className="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div className="testimonial-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
               <p className="testimonial-text">
                 &ldquo;Every visit feels like a celebration. The Himalayan tea and desserts
                 are the perfect way to end a meal. My family&rsquo;s favorite restaurant!&rdquo;

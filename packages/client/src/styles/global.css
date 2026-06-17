@@ -2,9 +2,9 @@
    Gokyo Bistro — Premium Warm Gourmet Theme
    Appetizing cream surfaces, rich crimson primary, golden amber accents
    Elegant typography, modern glassmorphism, & smooth micro-interactions
+   Fonts (Cormorant Garamond + Inter) are loaded via <link> in index.html
+   with preconnect — faster and more resilient than a render-blocking @import.
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* Surfaces & Backgrounds */
@@ -16,7 +16,7 @@
   /* Typography / Ink Colors */
   --ink: #1c1c22;            /* Near-black, clean neutral */
   --ink-soft: #5b5b66;       /* Neutral grey */
-  --ink-faint: #9a9aa4;      /* Subdued label color */
+  --ink-faint: #71717a;      /* Subdued label color — meets WCAG AA (4.8:1) on white */
 
   /* Gourmet Brand Accents */
   --primary: #1c1c22;        /* Charcoal — clean monochrome primary */
@@ -2785,9 +2785,48 @@ body::after {
   }
 }
 
+/* ============================================================
+   Accessibility — keyboard focus & reduced motion
+   ============================================================ */
+
+/* Visible focus ring for keyboard users (not shown on mouse click, thanks to
+   :focus-visible). Charcoal reads on the light UI; gold is swapped in on the
+   dark surfaces so the ring stays visible there. The outline follows each
+   element's own border-radius in modern browsers. */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.reserve-section :focus-visible,
+.admin-sidebar :focus-visible,
+.offer-card :focus-visible {
+  outline-color: var(--accent);
+}
+/* .star-rating .star clears its outline in the base rule (higher specificity),
+   so restore a focus ring explicitly for keyboard users. */
+.star-rating .star:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Respect users who prefer reduced motion: stop the looping float/scale
+   animations and page transitions, and disable smooth scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 @media (max-width: 480px) {
-  .container { 
-    padding: 0 16px; 
+  .container {
+    padding: 0 16px;
   }
   .footer-container { 
     grid-template-columns: 1fr; 

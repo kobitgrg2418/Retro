@@ -70,6 +70,7 @@ export default function Menu() {
             type="text"
             className="form-input search-input"
             placeholder="Search dishes..."
+            aria-label="Search dishes"
             value={search}
             onChange={e => setSearch(e.target.value)}
           />

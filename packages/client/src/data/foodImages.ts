@@ -27,12 +27,12 @@ const PHOTOS: Record<string, string> = {
   'Yomari': 'dumpling',
   'Lassi (Mango)': 'yogurt',
   'Tongba (Millet Beer)': 'quati',
+  'Fresh Lime Soda': 'limesoda',
 };
 
-// drinks with no photo in the grid -> white-plate icon
+// drinks with no photo yet -> white-plate icon
 const EMOJIS: Record<string, string> = {
   'Masala Tea': '🍵',
-  'Fresh Lime Soda': '🥤',
   'Everest Beer': '🍺',
   'Khukri Rum': '🥃',
   'Red Wine': '🍷',
